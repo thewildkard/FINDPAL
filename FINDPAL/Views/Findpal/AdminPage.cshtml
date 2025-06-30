@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "AdminPage";
+    var users = ViewBag.Users as IEnumerable<FINDPAL.Models.User>;
+    var items = ViewBag.Items as IEnumerable<FINDPAL.Models.Item>;
+}
+
+<h2>AdminPage</h2>
+
+<div class="row">
+    <!-- Users Section -->
+    <div class="col-md-6">
+        <h3>Users</h3>
+        @if (users != null && users.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Roll Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.RollNumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No users found.</p>
+        }
+    </div>
+
+    <!-- Items Section -->
+    <div class="col-md-6">
+        <h3>Items</h3>
+        @if (items != null && items.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in items)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.Category</td>
+                            <td>@item.Status</td>
+                            <td>
+                                @using (Html.BeginForm("DeleteItem", "Findpal", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("itemId", item.ItemId)
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No items found.</p>
+        }
+    </div>
+</div>

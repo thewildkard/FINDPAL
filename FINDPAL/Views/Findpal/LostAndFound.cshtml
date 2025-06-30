@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FINDPAL.Models.Report>
+@{
+    ViewBag.Title = "Lost and Found";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lost and Found Reports</h2>
+    @if (isAdmin)
+    {
+        <div class="alert alert-info">You are viewing all reports (Admin View).</div>
+    }
+    else
+    {
+        <div class="alert alert-secondary">You are viewing reports you have submitted.</div>
+    }
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover bg-white">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Date Reported</th>
+                    <th>Reporter</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var report in Model)
+                    {
+                        <tr>
+                            <td>@report.Title</td>
+                            <td>@report.Description</td>
+                            <td>@(report.PostCategory != null ? report.PostCategory.Name : "N/A")</td>
+                            <td>@(report.PostType != null ? report.PostType.Name : "N/A")</td>
+                            <td>@report.Location</td>
+                            <td>@report.Date.ToString("yyyy-MM-dd")</td>
+                            <td>@(report.User != null ? report.User.UserName : "N/A")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">No reports found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+</div>

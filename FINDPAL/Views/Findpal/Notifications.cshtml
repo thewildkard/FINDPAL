@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FINDPAL.Models.ScanNotification>
+
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Found By</th>
+                    <th>Scan Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var notification in Model)
+                {
+                    <tr>
+                        <td>@(notification.Item != null ? notification.Item.Title : "N/A")</td>
+                        <td>@(notification.User != null ? notification.User.UserName : "N/A")</td>
+                        <td>
+                            @(notification.ScanDateTime.HasValue
+                                ? notification.ScanDateTime.Value.ToString("MMMM dd, yyyy hh:mm tt")
+                                : "N/A")
+                        </td>
+                        <td>
+                            @if (!notification.NotificationSent)
+                            {
+                                @Html.BeginForm("MarkNotificationAsSent", "Findpal", FormMethod.Post)
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("notificationId", notification.NotificationId)
+                                    <button type="submit" class="btn btn-primary btn-sm">Mark as Sent</button>
+                                }
+                            }
+                            else
+                            {
+                                <span class="text-success">Notification Sent</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You have no pending notifications.</p>
+}
+
+<div>
+    <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+</div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FINDPAL", "FINDPAL\FINDPAL.csproj", "{B8E4CC23-D706-4B88-A6E5-8860C6EDFABD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8E4CC23-D706-4B88-A6E5-8860C6EDFABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E4CC23-D706-4B88-A6E5-8860C6EDFABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E4CC23-D706-4B88-A6E5-8860C6EDFABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E4CC23-D706-4B88-A6E5-8860C6EDFABD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B60454FE-4DCF-483D-AE32-A7BD2B6A4C0D}
+	EndGlobalSection
+EndGlobal

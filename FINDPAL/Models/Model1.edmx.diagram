@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ab29347725604abba6ff3525f8a40cf6" Name="Diagram1">
+        <EntityTypeShape EntityType="FINDPALModel.Item" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINDPALModel.PostCategory" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINDPALModel.PostType" Width="1.5" PointX="3.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINDPALModel.Report" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINDPALModel.ScanNotification" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINDPALModel.User" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="FINDPALModel.FK__Items__ReporterU__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="FINDPALModel.FK__ScanNotif__ItemI__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="FINDPALModel.FK__Reports__PostCat__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="FINDPALModel.FK__Reports__PostTyp__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="FINDPALModel.FK__Reports__UserId__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="FINDPALModel.FK__ScanNotif__Finde__2E1BDC42" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

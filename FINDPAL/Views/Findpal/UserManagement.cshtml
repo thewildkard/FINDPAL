@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FINDPAL.Models.User>
+@{
+    ViewBag.Title = "User Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
+}
+
+<h2>User Management</h2>
+
+@if (isAdmin)
+{
+    <p>
+        @Html.ActionLink("Add New User", "AddUser", null, new { @class = "btn btn-success" })
+    </p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Roll Number</th>
+            <th>Password</th>
+            @if (isAdmin)
+            {
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.RollNumber</td>
+                <td>@user.Hpassword</td>
+                @if (isAdmin)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditUser", new { id = user.UserID }, new { @class = "btn btn-primary btn-sm" }) |
+                        @using (Html.BeginForm("DeleteUser", "Findpal", FormMethod.Post, new { onsubmit = "return confirm('Are you sure?');" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", user.UserID)
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+</div>

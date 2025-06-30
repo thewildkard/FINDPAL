@@ -1,0 +1,14 @@
+﻿@model FINDPAL.Models.Report
+
+@{
+    ViewBag.Title = "Report Submitted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        <h2>Report Submitted Successfully!</h2>
+        <p>Your lost and found report has been received.</p>
+        <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+</div>

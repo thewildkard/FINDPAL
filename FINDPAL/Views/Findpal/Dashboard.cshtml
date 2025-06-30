@@ -1,0 +1,138 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            height: 100vh;
+        }
+
+            .sidebar a {
+                color: #ddd;
+            }
+
+                .sidebar a:hover {
+                    color: #fff;
+                }
+
+            .sidebar .user-info {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+                .sidebar .user-info img {
+                    width: 60px;
+                    border-radius: 50%;
+                }
+
+        .breadcrumb {
+            background-color: transparent;
+        }
+        .sidebar .nav {
+            margin-top: 2rem;
+        }
+
+        .sidebar .nav-link {
+            color: #bfc9d4;
+            font-size: 1.1em;
+            padding: 0.75rem 2rem;
+        }
+
+            .sidebar .nav-link.active, .sidebar .nav-link:hover {
+                background: #00bcd4;
+                color: #fff;
+                border-radius: 4px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="text-center p-4">
+                    <h2>FINDPAL</h2>
+                    <div class="user-info">
+                        @*<img src="https://via.placeholder.com/60" alt="User Avatar" />*@
+                        <p>@ViewBag.CurrentUserName</p>
+                    </div>
+                </div>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="@Url.Action("Dashboard", "Findpal")"><i class="fas d-grid"></i> Dashboard</a>
+                    <a class="nav-link active" href="@Url.Action("Report", "Findpal")"><i class="fas fa-edit"></i> Report</a>
+                    <a class="nav-link active" href="@Url.Action("LostAndFound", "Findpal")"><i class="fas fa-edit"></i> Lost And Found</a>
+                    <a class="nav-link active" href="@Url.Action("Notifications", "Findpal")"><i class="fas fa-edit"></i> Notification</a>
+                    <a class="nav-link active" href="@Url.Action("UserManagement", "Findpal")"><i class="fas fa-edit"></i> User Managment</a>
+                    <a class="nav-link" href="@Url.Action("Login", "Findpal")"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+
+                    <h2>Dashboard</h2>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Members</h5>
+                                    @*<p class="card-text">@Model.TotalMembers</p>*@
+                                    <a href="#" class="btn btn-light">More info</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Lost Items</h5>
+                                    @*<p class="card-text">@Model.TotalLostItems</p>*@
+                                    <a href="#" class="btn btn-light">More info</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Found Items</h5>
+                                    @*<p class="card-text">@Model.TotalFoundItems</p>*@
+                                    <a href="#" class="btn btn-light">More info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center p-3 mt-5 bg-light">
+        <p>&copy; 2025 Findpal😒. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

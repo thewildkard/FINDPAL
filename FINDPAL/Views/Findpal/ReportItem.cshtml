@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "Report Lost and Found Item";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            height: 100vh;
+        }
+
+            .sidebar a {
+                color: #ddd;
+            }
+
+                .sidebar a:hover {
+                    color: #fff;
+                }
+
+            .sidebar .user-info {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+                .sidebar .user-info img {
+                    width: 60px;
+                    border-radius: 50%;
+                }
+
+        .breadcrumb {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="text-center p-4">
+                    <h4>Lost and Found</h4>
+                    <div class="user-info">
+                        <img src="https://via.placeholder.com/60" alt="User Avatar" />
+                        <p>Junio K. Krem</p>
+                    </div>
+                </div>
+                <ul class="nav flex-column p-2">
+                    <li class="nav-item"><a class="nav-link" href="#">Lost and Found Item</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Report</li>
+                        </ol>
+                    </nav>
+
+                    <h2>Report Lost and Found Item</h2>
+
+                    <form method="post" action="@Url.Action("Submit", "Report")">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <label for="Date">Date:</label>
+                            <input type="text" class="form-control" id="Date" name="Date" placeholder="dd/mm/yyyy" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="Time">Time:</label>
+                            <input type="time" class="form-control" id="Time" name="Time" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="Category">Select Post Category:</label>
+                            @Html.DropDownListFor(m => m.SelectedCategory, Model.PostCategories, "Select Category", new { class = "form-control", required = true })
+                        </div>
+                        <div class="form-group">
+                            <label for="Title">Title:</label>
+                            <input type="text" class="form-control" id="Title" name="Title" placeholder="Title..." required />
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description:</label>
+                            <textarea class="form-control" id="Description" name="Description" rows="4" placeholder="Description..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Location">Location:</label>
+                            <input type="text" class="form-control" id="Location" name="Location" placeholder="Location..." required />
+                        </div>
+                        <div class="form-group">
+                            <label for="PostType">Post Type:</label>
+                            @Html.DropDownListFor(m => m.SelectedPostType, Model.PostTypes, "Select Post Type", new { class = "form-control", required = true })
+                        </div>
+                        <div class="form-group">
+                            <label for="Remarks">Remarks:</label>
+                            <textarea class="form-control" id="Remarks" name="Remarks" rows="4" placeholder="Remarks..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center p-3 mt-5 bg-light">
+        <p>&copy; 2025 Lost and Found System. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
