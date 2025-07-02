@@ -26,6 +26,7 @@ namespace FINDPAL.Models
         public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> ModifiedAt { get; set; }
+        public string Contact { get; set; }
     
         public virtual PostCategory PostCategory { get; set; }
         public virtual PostType PostType { get; set; }

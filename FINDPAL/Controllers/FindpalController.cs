@@ -10,7 +10,7 @@ namespace FINDPAL.Controllers
 {
     public class FindpalController : Controller
     {
-        private FINDPALEntities3 dbfind = new FINDPALEntities3();
+        private FINDPALEntities5 dbfind = new FINDPALEntities5();
 
         // GET: Login
         public ActionResult Login()
@@ -43,6 +43,32 @@ namespace FINDPAL.Controllers
             ModelState.AddModelError("", "Invalid login attempt.");
             return View(user);
         }
+
+        // GET: ForgotPassword
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // POST: ForgotPassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(string userName, int rollNumber, string newPassword)
+        {
+            var user = dbfind.Users.FirstOrDefault(u => u.UserName == userName && u.RollNumber == rollNumber);
+            if (user == null)
+            {
+                ViewBag.Error = "User not found. Please check your details.";
+                return View();
+            }
+
+            user.Hpassword = newPassword;
+            dbfind.SaveChanges();
+            ViewBag.Success = "Password reset successfully. You can now log in with your new password.";
+            return View();
+        }
+
 
         // GET: SignUp
         public ActionResult SignUp()
@@ -125,30 +151,41 @@ namespace FINDPAL.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Report(Report model)
         {
+            ViewBag.CurrentUserName = Session["CurrentUserName"] as string;
             if (ModelState.IsValid)
             {
-                // Set additional fields if needed
+
                 model.CreatedAt = DateTime.Now;
-                // Optionally set UserId if you want to track the user
+
                 int? userId = Session["CurrentUserId"] as int?;
                 if (userId != null)
+                {
                     model.UserId = userId;
+                    // Set the RollNumber from the current user
+                    var user = dbfind.Users.FirstOrDefault(u => u.UserID == userId.Value);
+                    //if (user != null)
+                    //{
+                    //    model.RollNumber = user.RollNumber;
+                    //}
+                }
+
 
                 dbfind.Reports.Add(model);
                 dbfind.SaveChanges();
 
                 ViewBag.Success = "Report submitted successfully!";
                 ModelState.Clear();
-                // Optionally redirect to a success page
+
                 return RedirectToAction("Success");
             }
 
-            // Repopulate dropdowns if validation fails
+
             ViewData["Categories"] = new SelectList(dbfind.PostCategories, "PostCategoryId", "Name");
             ViewData["PostTypes"] = new SelectList(dbfind.PostTypes, "PostTypeId", "Name");
             ViewBag.Error = "Please correct the errors and try again.";
             return View(model);
         }
+
 
 
         // GET: Success
@@ -163,29 +200,23 @@ namespace FINDPAL.Controllers
         // GET: LostAndFound
         public ActionResult LostAndFound()
         {
+            ViewBag.CurrentRollNumber = Session["CurrentRollNumber"] as string;
+
             int? userId = Session["CurrentUserId"] as int?;
             if (userId == null)
                 return RedirectToAction("Login");
 
-            bool isAdmin = (Session["CurrentUserName"] != null && Session["CurrentUserName"].ToString().ToLower() == "admin");
+            // Always show all reports to all users
+            var reports = dbfind.Reports
 
-            List<Report> reports;
-            if (isAdmin)
-            {
-                reports = dbfind.Reports.Include("User").Include("PostCategory").Include("PostType")
-                    .OrderByDescending(r => r.Date)
-                    .ToList();
-                ViewBag.IsAdmin = true;
-            }
-            else
-            {
-                reports = dbfind.Reports.Include("User").Include("PostCategory").Include("PostType")
-                    .Where(r => r.UserId == userId)
-                    .OrderByDescending(r => r.Date)
-                    .ToList();
-                ViewBag.IsAdmin = false;
-            }
+     .Include("User")
+     .Include("PostCategory")
+     .Include("PostType")
+     .OrderByDescending(r => r.Date)
+     .ToList();
 
+
+            ViewBag.IsAdmin = (Session["CurrentUserRole"] != null && Session["CurrentUserRole"].ToString() == "Admin");
             return View(reports);
         }
 
@@ -344,6 +375,7 @@ namespace FINDPAL.Controllers
             }
             return RedirectToAction("UserManagement");
         }
+
 
 
     }

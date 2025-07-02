@@ -185,6 +185,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="css\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -247,6 +248,7 @@
     <Content Include="Views\Findpal\EditUser.cshtml" />
     <Content Include="Views\Findpal\Success.cshtml" />
     <Content Include="Views\Findpal\LostAndFound.cshtml" />
+    <Content Include="Views\Findpal\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

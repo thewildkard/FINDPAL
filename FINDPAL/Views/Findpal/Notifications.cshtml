@@ -4,57 +4,147 @@
     ViewBag.Title = "Notifications";
 }
 
-<h2>Notifications</h2>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-@if (Model != null && Model.Any())
-{
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Found By</th>
-                    <th>Scan Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var notification in Model)
-                {
-                    <tr>
-                        <td>@(notification.Item != null ? notification.Item.Title : "N/A")</td>
-                        <td>@(notification.User != null ? notification.User.UserName : "N/A")</td>
-                        <td>
-                            @(notification.ScanDateTime.HasValue
+    .notifications-outer {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+    }
+
+    .notifications-container {
+        width: 100%;
+        max-width: 800px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 32px 24px 24px 24px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+        .notifications-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 100%;
+        }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .table {
+        background: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+        .table thead th {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    .btn-primary, .btn-primary:focus {
+        background: #007bff;
+        border: none;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+    .text-success {
+        font-weight: 500;
+        color: #28a745 !important;
+    }
+
+    .mt-3 {
+        margin-top: 1rem !important;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 24px;
+    }
+</style>
+
+
+<div class="notifications-outer">
+    <div class="notifications-container">
+        <h2>Notifications</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Found By</th>
+                            <th>Scan Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var notification in Model)
+                        {
+                            <tr>
+                                <td>@(notification.Item != null ? notification.Item.Title : "N/A")</td>
+                                <td>@(notification.User != null ? notification.User.UserName : "N/A")</td>
+                                <td>
+                                    @(notification.ScanDateTime.HasValue
                                 ? notification.ScanDateTime.Value.ToString("MMMM dd, yyyy hh:mm tt")
                                 : "N/A")
-                        </td>
-                        <td>
-                            @if (!notification.NotificationSent)
-                            {
-                                @Html.BeginForm("MarkNotificationAsSent", "Findpal", FormMethod.Post)
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.Hidden("notificationId", notification.NotificationId)
-                                    <button type="submit" class="btn btn-primary btn-sm">Mark as Sent</button>
-                                }
-                            }
-                            else
-                            {
-                                <span class="text-success">Notification Sent</span>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <p>You have no pending notifications.</p>
-}
+                                </td>
+                                <td>
+                                    @if (!notification.NotificationSent)
+                                    {
+                                        @Html.BeginForm("MarkNotificationAsSent", "Findpal", FormMethod.Post)
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("notificationId", notification.NotificationId)
+                                            <button type="submit" class="btn btn-primary btn-sm">Mark as Sent</button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success">Notification Sent</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>You have no pending notifications.</p>
+        }
 
-<div>
-    <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+        <div>
+            <a href="@Url.Action("Dashboard", "Findpal")" class="btn btn-primary mt-3">Back to Dashboard</a>
+        </div>
+
+    </div>
 </div>

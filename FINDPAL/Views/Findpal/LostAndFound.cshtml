@@ -25,7 +25,8 @@
                     <th>Status</th>
                     <th>Location</th>
                     <th>Date Reported</th>
-                    <th>Reporter</th>
+                    <th>Contact</th>
+                    <th>Roll Number</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +41,11 @@
                             <td>@(report.PostType != null ? report.PostType.Name : "N/A")</td>
                             <td>@report.Location</td>
                             <td>@report.Date.ToString("yyyy-MM-dd")</td>
-                            <td>@(report.User != null ? report.User.UserName : "N/A")</td>
+                            @*<td>@(report.User != null ? report.User.UserName : "N/A")</td>*@
+                            <td>@(report.Contact != null ? report.Contact: "")</td>
+                            @*<td>@report.Contact</td>*@
+                            <td>@(report.User != null ? report.User.RollNumber.ToString() : "N/A")</td>
+
                         </tr>
                     }
                 }

@@ -50,6 +50,7 @@
           <Property Name="UserId" Type="int" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ScanNotifications">
           <Key>
@@ -70,6 +71,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="RollNumber" Type="int" Nullable="false" />
           <Property Name="Hpassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK__Items__ReporterU__286302EC">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -229,6 +231,7 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Contact" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PostCategory" Relationship="Self.FK__Reports__PostCat__59FA5E80" FromRole="Reports" ToRole="PostCategories" />
           <NavigationProperty Name="PostType" Relationship="Self.FK__Reports__PostTyp__5AEE82B9" FromRole="Reports" ToRole="PostTypes" />
           <NavigationProperty Name="User" Relationship="Self.FK__Reports__UserId__5BE2A6F2" FromRole="Reports" ToRole="Users" />
@@ -254,6 +257,7 @@
           <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RollNumber" Type="Int32" Nullable="false" />
           <Property Name="Hpassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Items" Relationship="Self.FK__Items__ReporterU__286302EC" FromRole="Users" ToRole="Items" />
           <NavigationProperty Name="Reports" Relationship="Self.FK__Reports__UserId__5BE2A6F2" FromRole="Users" ToRole="Reports" />
           <NavigationProperty Name="ScanNotifications" Relationship="Self.FK__ScanNotif__Finde__2E1BDC42" FromRole="Users" ToRole="ScanNotifications" />
@@ -330,7 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FINDPALEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FINDPALEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="PostCategories" EntityType="Self.PostCategory" />
           <EntitySet Name="PostTypes" EntityType="Self.PostType" />
@@ -367,7 +371,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FINDPALModelStoreContainer" CdmEntityContainer="FINDPALEntities3">
+        <EntityContainerMapping StorageEntityContainer="FINDPALModelStoreContainer" CdmEntityContainer="FINDPALEntities5">
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="FINDPALModel.Item">
               <MappingFragment StoreEntitySet="Items">
@@ -415,6 +419,7 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -437,6 +442,7 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="RollNumber" ColumnName="RollNumber" />
                 <ScalarProperty Name="Hpassword" ColumnName="Hpassword" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

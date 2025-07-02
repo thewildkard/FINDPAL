@@ -10,14 +10,13 @@
 namespace FINDPAL.Models
 {
     using System;
-    using System.Collections;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FINDPALEntities3 : DbContext
+    public partial class FINDPALEntities5 : DbContext
     {
-        public FINDPALEntities3()
-            : base("name=FINDPALEntities3")
+        public FINDPALEntities5()
+            : base("name=FINDPALEntities5")
         {
         }
     
@@ -32,6 +31,5 @@ namespace FINDPAL.Models
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<ScanNotification> ScanNotifications { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public static IEnumerable PostCategory { get; internal set; }
     }
 }
